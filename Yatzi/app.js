@@ -20,22 +20,16 @@ app.get("/",(req,res) => {
     res.render("forside" , {spillere : req.session.players})
 })
 
-app.post("/:spiller",(req,res) => {
-    let player = req.params.spiller
-    req.session.players.push(player)
+/*app.push("/:spiller",(req,res) => {
+    req.session.players.push(req.params.spiller)
     res.redirect("/")
-})
+})*/
 
 app.get('/spilSide', (req, res) => {
     res.render('spilSide', {})
 })
 
 app.post('/spilSide', (req, res) => {
-    let username = req.body.username
-    
-    req.session.isLoggedIn = true
-    req.session.username = username
-
     res.redirect("/spilSide")
 })
 
