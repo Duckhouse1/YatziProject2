@@ -14,7 +14,15 @@ app.set("view engine", "pug")
 
 //ROUTES
 app.get("/",(req,res) => {
-    res.render("forside")
+    if (!req.session.players){
+        req.session.players = []
+    }
+    res.render("forside" , {spillere : req.session.players})
+})
+
+app.push("/:spiller",(req,res) => {
+    req.session.players.push(req.params.spiller)
+    res.redirect("/")
 })
 
 app.listen(8000, () => {
