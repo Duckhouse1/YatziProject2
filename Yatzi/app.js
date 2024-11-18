@@ -17,6 +17,19 @@ app.get("/",(req,res) => {
     res.render("forside")
 })
 
+app.get('/spilSide', (req, res) => {
+    res.render('spilSide', {})
+})
+
+app.post('/spilSide', (req, res) => {
+    let username = req.body.username
+    
+    req.session.isLoggedIn = true
+    req.session.username = username
+
+    res.redirect("/spilSide")
+})
+
 app.listen(8000, () => {
     console.log("Serveren lytter på port 8000");
 })
