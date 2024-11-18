@@ -20,8 +20,9 @@ app.get("/",(req,res) => {
     res.render("forside" , {spillere : req.session.players})
 })
 
-app.push("/:spiller",(req,res) => {
-    req.session.players.push(req.params.spiller)
+app.post("/:spiller",(req,res) => {
+    let player = req.params.spiller
+    req.session.players.push(player)
     res.redirect("/")
 })
 
