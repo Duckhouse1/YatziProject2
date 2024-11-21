@@ -7,6 +7,7 @@ const app = express()
 app.use(express.urlencoded({ extended: true }))
 
 app.use(express.static('assets'))
+
 app.use(session({
     secret: "secret", //Man "salter" ens password med noget mere end det man faktisk skriver (brug uuidgen ) så man ikke kan bruge en "rainbow tabel" og hacke dit password nemt
     saveUnintialized : true,
