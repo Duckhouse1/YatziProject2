@@ -1,65 +1,67 @@
 html 
     head 
-        title Yatzy 
-        link(rel="stylesheet" href="GuI.css")
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Yatzi projekt
+        link(rel="stylesheet" href="GuI.css") 
         script(src="LogikGuI.js" defer)
     body
         #Terninger-Container
             #Terninger
-            table
-                tr
-                td#td1
-                    img(src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Dice-1-b.svg" alt="")
-                td#td2
-                    img(src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Dice-2-b.svg" alt="")
-                td#td3
-                    img(src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Dice-3-b.svg" alt="")
-                td#td4
-                    img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Dice-4-b.svg/900px-Dice-4-b.svg.png?20231029222734" alt="")
-                td#td5
-                    img(src="https://upload.wikimedia.org/wikipedia/commons/0/08/Dice-5-b.svg" alt="")
+                table
+                    tr
+                    td#td1
+                        img(src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Dice-1-b.svg" alt="")
+                    td#td2
+                        img(src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Dice-2-b.svg" alt="")
+                    td#td3
+                        img(src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Dice-3-b.svg" alt="")
+                    td#td4
+                        img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Dice-4-b.svg/900px-Dice-4-b.svg.png?20231029222734" alt="")
+                    td#td5
+                        img(src="https://upload.wikimedia.org/wikipedia/commons/0/08/Dice-5-b.svg" alt="")
             #rolls
-            label#TurnLabel Turn:
-            button#rollButton Roll
+                label#TurnLabel Turn:
+                button#rollButton Roll
         #Point-Container
             #PointLabel-Container
-            label 1-s
-            label 2-s
-            label 3-s
-            label 4-s
-            label 5-s
-            label 6-s
-            label One pair
-            label Two pair
-            label Three same
-            label Four same
-            label Full house
-            label Small straight
-            label Large straight
-            label Chance
-            label Yatzi
+                label 1-s
+                label 2-s
+                label 3-s
+                label 4-s
+                label 5-s
+                label 6-s
+                label One pair
+                label Two pair
+                label Three same
+                label Four same
+                label Full house
+                label Small straight
+                label Large straight
+                label Chance
+                label Yatzi
             #raekkeInput
-            input(type="text" name="1-s" readonly)
-            input(type="text" name="2-s" readonly)
-            input(type="text" name="3-s" readonly)
-            input(type="text" name="4-s" readonly)
-            input(type="text" name="5-s" readonly)
-            input(type="text" name="6-s" readonly)
-            input(type="text" name="One pair" readonly)
-            input(type="text" name="Two pair" readonly)
-            input(type="text" name="Three same" readonly)
-            input(type="text" name="Four same" readonly)
-            input(type="text" name="Full house" readonly)
-            input(type="text" name="Small straight" readonly)
-            input(type="text" name="Large straight" readonly)
-            input(type="text" name="Chance" readonly)
-            input(type="text" name="Yatzi" readonly)
+                input(type="text" name="1-s" readonly)
+                input(type="text" name="2-s" readonly)
+                input(type="text" name="3-s" readonly)
+                input(type="text" name="4-s" readonly)
+                input(type="text" name="5-s" readonly)
+                input(type="text" name="6-s" readonly)
+                input(type="text" name="One pair" readonly)
+                input(type="text" name="Two pair" readonly)
+                input(type="text" name="Three same" readonly)
+                input(type="text" name="Four same" readonly)
+                input(type="text" name="Full house" readonly)
+                input(type="text" name="Small straight" readonly)
+                input(type="text" name="Large straight" readonly)
+                input(type="text" name="Chance" readonly)
+                input(type="text" name="Yatzi" readonly)
             #sumRaekke
-            label Sum:
-            input#Sum(type="text" name="Sum" readonly)
+                label Sum:
+                input#Sum(type="text" name="Sum" readonly)
             #bonusTotalRaekke
-            label Bonus:
-            input#Bonus(type="text" name="Bonus" disabled=true placeholder="50")
-            #Total
-                label Total:
-                input#Total(type="text" name="Total")
+                label Bonus:
+                input#Bonus(type="text" name="Bonus" disabled=true placeholder="50")
+                #Total
+                    label Total:
+                    input#Total(type="text" name="Total")
