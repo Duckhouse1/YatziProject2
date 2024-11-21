@@ -1,0 +1,66 @@
+img {
+    width: 60px;
+    height: 60px;
+}
+td {
+    width: 60px;
+    height: 60px;
+}
+
+div#Terninger-Container {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "Terninger" "Rolls";
+}
+
+div#rolls button {
+    margin-left: 30%;
+    grid-area: Rolls;
+    height: 30px;
+    width: 40px;
+}
+
+div#Point-Container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "Label inputs Sum Bonus";
+}
+
+div#PointLabel-Container {
+    grid-area: Label;
+    display: grid;
+}
+
+#raekkeInput {
+    grid-area: inputs;
+    margin-top: -4%;
+    margin-left: -20%;
+}
+
+#raekkeInput input {
+    display: grid;
+    margin-top: 5%;
+    margin-left: -20%;
+}
+
+#sumRaekke {
+    grid-area: Sum;
+    margin-left: -100%;
+    margin-top: 70%;
+}
+
+#bonusTotalRaekke {
+    grid-area: Bonus;
+    margin-left: -130%;
+    margin-top: 70%;
+}
+
+#Total {
+    grid-area: Bonus;
+    margin-top: 25%;
+}
+
+body {
+    justify-content: center;
+    margin-left: 24%;
+}
