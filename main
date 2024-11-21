@@ -1,0 +1,4 @@
+endpoint som generere al html i pug
+pug laver kald til yatzy spillet på serversiden.
+det js vi inkludere på klientsiden ikke er spillet men kald til serveren.
+
