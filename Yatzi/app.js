@@ -20,18 +20,21 @@ app.get("/",(req,res) => {
     res.render("forside" , {spillere : req.session.players})
 })
 
-/*app.push("/:spiller",(req,res) => {
-    req.session.players.push(req.params.spiller)
+app.post("/:spiller",(req,res) => {
+    let spiller = req.body.spiller
+    if (spiller) {
+        req.session.players.push(spiller); // Add player to the session array
+    }
     res.redirect("/")
-})*/
-
+})
+/*
 app.get('/spilSide', (req, res) => {
     res.render('spilSide', {})
 })
 
 app.post('/spilSide', (req, res) => {
     res.redirect("/spilSide")
-})
+})*/
 
 app.listen(8000, () => {
     console.log("Serveren lytter på port 8000");
