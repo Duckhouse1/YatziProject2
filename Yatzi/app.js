@@ -21,8 +21,6 @@ app.get("/",(req,res) => {
     }
     res.render("forside" , {spillere : req.session.players})
 })
-
-<<<<<<< HEAD
 app.post("/:spiller",(req,res) => {
     let spiller = req.body.spiller
     if (spiller) {
@@ -30,8 +28,7 @@ app.post("/:spiller",(req,res) => {
     }
     res.redirect("/")
 })
-/*
-=======
+
 app.post("/",(req,res) => {
     let player = req.body.spiller
     console.log("PLayer name" + player);
@@ -39,14 +36,13 @@ app.post("/",(req,res) => {
     res.redirect("/")
 })
 
->>>>>>> 36dc621d33d9533c75a1d6eb8b951032b8ffc21c
 app.get('/spilSide', (req, res) => {
     res.render('spilSide', {})
 })
 
 app.post('/spilSide', (req, res) => {
     res.redirect("/spilSide")
-})*/
+})
 
 
 //Starter server:
