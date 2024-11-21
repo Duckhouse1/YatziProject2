@@ -4,6 +4,8 @@ const session = require("express-session")
 const app = express()
 
 //MIIDDLEWARE
+app.use(express.urlencoded({ extended: true }))
+
 app.use(express.static('assets'))
 app.use(session({
     secret: "secret", //Man "salter" ens password med noget mere end det man faktisk skriver (brug uuidgen ) så man ikke kan bruge en "rainbow tabel" og hacke dit password nemt
@@ -20,6 +22,7 @@ app.get("/",(req,res) => {
     res.render("forside" , {spillere : req.session.players})
 })
 
+<<<<<<< HEAD
 app.post("/:spiller",(req,res) => {
     let spiller = req.body.spiller
     if (spiller) {
@@ -28,6 +31,15 @@ app.post("/:spiller",(req,res) => {
     res.redirect("/")
 })
 /*
+=======
+app.post("/",(req,res) => {
+    let player = req.body.spiller
+    console.log("PLayer name" + player);
+    req.session.players.push(player)
+    res.redirect("/")
+})
+
+>>>>>>> 36dc621d33d9533c75a1d6eb8b951032b8ffc21c
 app.get('/spilSide', (req, res) => {
     res.render('spilSide', {})
 })
@@ -36,6 +48,8 @@ app.post('/spilSide', (req, res) => {
     res.redirect("/spilSide")
 })*/
 
+
+//Starter server:
 app.listen(8000, () => {
     console.log("Serveren lytter på port 8000");
 })
