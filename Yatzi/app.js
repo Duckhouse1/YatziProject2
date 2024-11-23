@@ -33,7 +33,7 @@ async function spillerFil(spiller) {
 }
 
 // ROUTES
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
     if (!req.session.players) {
         req.session.players = [];
     }
@@ -60,10 +60,19 @@ app.post("/", (req, res) => {
 });
 
 app.get('/spilSide', (req, res) => {
-    res.render('spilSide', {});
+    if (!req.session.players) {
+        req.session.players = [];
+    }
+    res.render('spilSide', { spillere: req.session.players });
 });
 
 app.post('/spilSide', (req, res) => {
+    let player = req.body.spiller;
+    console.log("Player name:", player);
+    if (player) {
+        req.session.players.push(player);
+        spillerFil(player);
+    }
     res.redirect("/spilSide");
 });
 
