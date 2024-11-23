@@ -1,4 +1,3 @@
-
 img {
     width: 60px;
     height: 60px;
@@ -20,6 +19,11 @@ div#rolls button {
     grid-area: Rolls;
     height: 30px;
     width: 40px;
+}
+
+#spiller-container {
+    float: right;
+    margin-right: 100px;
 }
 
 div#Point-Container {
