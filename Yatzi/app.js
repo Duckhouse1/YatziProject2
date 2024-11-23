@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const fs = require('node:fs/promises');
+const path = require("path");
 
 const app = express();
 
@@ -15,18 +16,20 @@ app.use(session({
 }));
 app.set("view engine", "pug");
 
+const filePath = path.resolve(__dirname, 'spillere.txt');
+
 async function spillerFil(spiller) {
     try {
         let content = '';
         try {
-            content = await fs.readFile('/Users/clemendalgaard/Desktop/Skole/6. DIP/EksYatzy/YatziProject2/spillere.txt', { encoding: 'utf8' });
+            content = await fs.readFile(filePath, { encoding: 'utf8' });
         } catch (err) {
             console.log('No existing file or error reading it');
         }
         
         const updatedContent = content + '\n' + spiller;
         
-        await fs.writeFile('/Users/clemendalgaard/Desktop/Skole/6. DIP/EksYatzy/YatziProject2/spillere.txt', updatedContent);
+        await fs.writeFile(filePath, updatedContent);
     } catch (err) {
         console.log("Error writing to file:", err);
     }
