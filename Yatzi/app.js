@@ -1,16 +1,12 @@
 const express = require("express")
 const session = require("express-session")
-
 const fs = require('node:fs/promises')
-
-
-const app = express()
-const express = require("express");
-const session = require("express-session");
-const fs = require('node:fs/promises');
 const path = require("path");
 
+const app = express()
 
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(express.json()); // Parse JSON bodies
 app.use(express.static('assets'))
 
 app.use(session({
