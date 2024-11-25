@@ -48,6 +48,12 @@ class Spiller {
     getNavn(){
         return this.navn
     }
+    getScore(){
+        return this.score
+    }
+    getRollsLeft(){
+        return this.rollsLeft
+    }
 }
 
 module.exports = { YatziGame }

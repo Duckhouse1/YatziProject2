@@ -25,17 +25,14 @@ const filePath = path.resolve(__dirname, 'spillere.txt');
 async function spillerFil() {
     try {
         let content = "Spillere: ";
-        /*
-        try {
-            const fileContent = await fs.readFile(filePath, { encoding: 'utf8' });
-            content = JSON.parse(fileContent); // Parse existing JSON data
-        } catch (err) {
-            console.log('No existing file or error reading it');
-        }
-            */
-         content.push("Spillere: "+game.getPlayers())
+        
+        const players = game.getPlayers().map(player => {
+            return { navn: player.getNavn() , score: player.getScore(), rollsLeft: player.getRollsLeft()}; 
+        });
 
-         await fs.writeFile(filePath, JSON.stringify(content, 2) , { encoding: 'utf8' });
+         content += JSON.stringify(players, null,2); 
+
+        await fs.writeFile(filePath, content, { encoding: 'utf8' });
     } catch (err) {
         console.log("Error writing to file:", err);
     }
