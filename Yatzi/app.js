@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(express.static('assets'));
 
 app.use(session({
-    secret: "secret", 
+    secret: "secret",
     saveUninitialized: true,
     resave: true
 }));
@@ -22,16 +22,12 @@ app.set("view engine", "pug");
 
 const filePath = path.resolve(__dirname, 'spillere.txt');
 
-async function spillerFil(spiller) {
-    try {
-        let content = "YatziGame: ";
+async function gemSpil(spiller) {
+    let content = "YatziGame: ";
 
-         content += JSON.stringify(game, null,2); 
+    content += JSON.stringify(game, null, 2);
 
-        await fs.writeFile(filePath, content, { encoding: 'utf8' });
-    } catch (err) {
-        console.log("Error writing to file:", err);
-    }
+    await fs.writeFile(filePath, content, { encoding: 'utf8' });
 }
 
 // ROUTES
@@ -49,7 +45,7 @@ app.post("/", (req, res) => {
         game.addPlayer(player)
         console.log(game.getPlayers());
         req.session.players.push(player);
-        spillerFil(player);
+        gemSpil(player);
     }
     res.redirect("/");
 });
@@ -66,7 +62,7 @@ app.post('/spilSide', (req, res) => {
     console.log("Player name:", player);
     if (player) {
         req.session.players.push(player);
-        spillerFil(player);
+        gemSpil(player);
     }
     res.redirect("/spilSide");
 });
