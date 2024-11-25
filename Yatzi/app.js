@@ -20,26 +20,54 @@ const filePath = path.resolve(__dirname, 'spillere.txt');
 
 async function spillerFil(spiller) {
     try {
-        let content = '';
+        
+        let players = [];
         try {
-            content = await fs.readFile(filePath, { encoding: 'utf8' });
+            const content = await fs.readFile(filePath, { encoding: 'utf8' });
+            players = JSON.parse(content); // Parse JSON fra filen
         } catch (err) {
-            console.log('No existing file or error reading it');
+            console.log("Fil ikke fundet eller tom. Opretter ny.");
         }
+
         
-        const updatedContent = content + '\n' + spiller;
+        players.push({ navn: spiller, score: 0, rollsLeft: 3, dice: [0, 0, 0, 0, 0] });
+
         
-        await fs.writeFile(filePath, updatedContent);
+        await fs.writeFile(filePath, JSON.stringify(players, null, 2)); 
     } catch (err) {
-        console.log("Error writing to file:", err);
+        console.error("Fejl ved skrivning til spillerfil:", err);
     }
 }
+
 
 // ROUTES
 app.get("/", (req, res) => {
     if (!req.session.players) {
         req.session.players = [];
     }
+    res.render("forside", { spillere: req.session.players });
+});
+
+    // laves til /startGame
+    // bruges til at gemme score, rul, og terningekast
+app.get("/startGame", (req, res) => {
+    const playerName = req.body.spiller;
+    if (playerName) {
+        if (!req.session.games) {
+            req.session.games = {};
+        }
+    }
+
+    if (!req.session.games[playerName]) {
+        req.session.games[playerName] = {
+            score: 0,
+            rollsLeft: 3,
+            dice: [0,0,0,0,0]
+        };
+    }
+    spillerFil(playerName)
+
+
     res.render("forside", { spillere: req.session.players });
 });
 
