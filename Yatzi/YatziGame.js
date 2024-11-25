@@ -33,4 +33,3 @@ class Terning {
         this.value = Math.floor(Math.random() * 6) + 1
     }
 }
-

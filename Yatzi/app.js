@@ -5,9 +5,11 @@ const fs = require('node:fs/promises')
 
 
 const app = express()
+const express = require("express");
+const session = require("express-session");
+const fs = require('node:fs/promises');
+const path = require("path");
 
-//MIIDDLEWARE
-app.use(express.urlencoded({ extended: true }))
 
 app.use(express.static('assets'))
 
