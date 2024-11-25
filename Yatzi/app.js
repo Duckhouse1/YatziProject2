@@ -25,10 +25,6 @@ const filePath = path.resolve(__dirname, 'spillere.txt');
 async function spillerFil(spiller) {
     try {
         let content = "YatziGame: ";
-        
-        const players = game.getPlayers().map(player => {
-            return { navn: player.getNavn() , score: player.getScore(), rollsLeft: player.getRollsLeft()}; 
-        });
 
          content += JSON.stringify(game, null,2); 
 
@@ -44,17 +40,6 @@ app.get("/", (req, res) => {
         req.session.players = [];
     }
     res.render("forside", { spillere: req.session.players });
-});
-
-app.post("/:spiller", (req, res) => {
-    let spiller = req.body.spiller;
-    if (spiller) {
-        game.addPlayer(spiller)
-        console.log(game.getPlayers());
-        req.session.players.push(spiller);
-        spillerFil(spiller);
-    }
-    res.redirect("/");
 });
 
 app.post("/", (req, res) => {

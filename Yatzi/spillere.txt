@@ -1,23 +1,23 @@
 YatziGame: {
   "terninger": [
     {
-      "value": 6,
+      "value": 2,
       "hold": false
     },
     {
-      "value": 5,
+      "value": 2,
       "hold": false
     },
     {
-      "value": 4,
+      "value": 3,
       "hold": false
     },
     {
-      "value": 5,
+      "value": 2,
       "hold": false
     },
     {
-      "value": 4,
+      "value": 1,
       "hold": false
     }
   ],
@@ -29,6 +29,11 @@ YatziGame: {
     },
     {
       "navn": "Clemen",
+      "score": 0,
+      "rollsLeft": 3
+    },
+    {
+      "navn": "Taus",
       "score": 0,
       "rollsLeft": 3
     }
