@@ -1,13 +1,17 @@
-const express = require("express")
-const session = require("express-session")
-const fs = require('node:fs/promises')
+
+const express = require("express");
+const session = require("express-session");
+const fs = require('node:fs/promises');
 const path = require("path");
+const app = express();
+const { YatziGame } = require('./YatziGame');
 
-const app = express()
+const game = new YatziGame();
 
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
-app.use(express.json()); // Parse JSON bodies
-app.use(express.static('assets'))
+// MIDDLEWARE
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.static('assets'));
 
 app.use(session({
     secret: "secret", 
@@ -18,7 +22,7 @@ app.set("view engine", "pug");
 
 const filePath = path.resolve(__dirname, 'spillere.txt');
 
-async function spillerFil(spiller) {
+async function spillerFil() {
     try {
         
         let players = [];
@@ -74,6 +78,8 @@ app.get("/startGame", (req, res) => {
 app.post("/:spiller", (req, res) => {
     let spiller = req.body.spiller;
     if (spiller) {
+        game.addPlayer(spiller)
+        console.log(game.getPlayers());
         req.session.players.push(spiller);
         spillerFil(spiller);
     }
@@ -84,6 +90,8 @@ app.post("/", (req, res) => {
     let player = req.body.spiller;
     console.log("Player name:", player);
     if (player) {
+        game.addPlayer(player)
+        console.log(game.getPlayers());
         req.session.players.push(player);
         spillerFil(player);
     }

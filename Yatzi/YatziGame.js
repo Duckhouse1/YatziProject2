@@ -7,14 +7,19 @@ class YatziGame {
             new Terning(),
             new Terning()
         ];
-
-        
+        this.spillere = []
+    }
+    addPlayer(spiller){
+        this.spillere.push(new Spiller(spiller))
+    }
+    getPlayers(){
+        return this.spillere
     }
 }
 class Terning {
-    constructor(value, hold) {
+    constructor() {
         this.value = Math.floor(Math.random() * 6) + 1
-        this.hold = true
+        this.hold = false
     }
 
     getValue() {
@@ -33,3 +38,14 @@ class Terning {
         this.value = Math.floor(Math.random() * 6) + 1
     }
 }
+class Spiller {
+    constructor (navn){
+        this.navn = navn
+    }
+
+    getNavn(){
+        return this.navn
+    }
+}
+
+module.exports = { YatziGame }
