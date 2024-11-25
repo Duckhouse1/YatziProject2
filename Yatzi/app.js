@@ -22,7 +22,7 @@ app.set("view engine", "pug");
 
 const filePath = path.resolve(__dirname, 'spillere.txt');
 
-async function spillerFil() {
+async function spillerFil(spiller) {
     try {
         let content = "Spillere: ";
         
