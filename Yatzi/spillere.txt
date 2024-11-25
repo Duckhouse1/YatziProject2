@@ -1,12 +1,36 @@
-Spillere: [
-  {
-    "navn": "Dennis",
-    "score": 0,
-    "rollsLeft": 3
-  },
-  {
-    "navn": "Clemen",
-    "score": 0,
-    "rollsLeft": 3
-  }
-]
+YatziGame: {
+  "terninger": [
+    {
+      "value": 6,
+      "hold": false
+    },
+    {
+      "value": 5,
+      "hold": false
+    },
+    {
+      "value": 4,
+      "hold": false
+    },
+    {
+      "value": 5,
+      "hold": false
+    },
+    {
+      "value": 4,
+      "hold": false
+    }
+  ],
+  "spillere": [
+    {
+      "navn": "Dennis",
+      "score": 0,
+      "rollsLeft": 3
+    },
+    {
+      "navn": "Clemen",
+      "score": 0,
+      "rollsLeft": 3
+    }
+  ]
+}

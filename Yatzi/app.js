@@ -24,13 +24,13 @@ const filePath = path.resolve(__dirname, 'spillere.txt');
 
 async function spillerFil(spiller) {
     try {
-        let content = "Spillere: ";
+        let content = "YatziGame: ";
         
         const players = game.getPlayers().map(player => {
             return { navn: player.getNavn() , score: player.getScore(), rollsLeft: player.getRollsLeft()}; 
         });
 
-         content += JSON.stringify(players, null,2); 
+         content += JSON.stringify(game, null,2); 
 
         await fs.writeFile(filePath, content, { encoding: 'utf8' });
     } catch (err) {

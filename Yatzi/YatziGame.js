@@ -9,6 +9,9 @@ class YatziGame {
         ];
         this.spillere = []
     }
+    getTerninger(){
+        return this.terninger
+    }
     addPlayer(spiller){
         this.spillere.push(new Spiller(spiller))
     }
