@@ -34,3 +34,13 @@ class Terning {
     }
 }
 
+class Spiller {
+
+    constructor(name){
+        this.name = name;
+    }
+  
+
+
+}
+
