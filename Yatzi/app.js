@@ -89,6 +89,14 @@ app.post('/spilSide', (req, res) => {
     res.redirect("/spilSide");
 });
 
+app.put('/addGamer', (request, response) => {
+
+});
+
+app.get('/rollDice', (request, response) => {
+
+})
+
 // Start the server
 app.listen(8000, () => {
     console.log("Serveren lytter på port 8000");
