@@ -41,6 +41,8 @@ class Terning {
 class Spiller {
     constructor (navn){
         this.navn = navn
+        this.score = 0;
+        this.rollsLeft = 3
     }
 
     getNavn(){
