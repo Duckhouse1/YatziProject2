@@ -2,3 +2,16 @@ endpoint som generere al html i pug
 pug laver kald til yatzy spillet på serversiden.
 det js vi inkludere på klientsiden ikke er spillet men kald til serveren.
 
+gem spillere i en fil så det er persistent
+brug session til at skifte mellem spillere
+session activePlayer hente den respektive spiller profil
+
+GUI kode på klientsiden
+
+api endpoint til terninger
+
+game require = yatzygame på en eller anden måde
+lav en instans af yatzy klassen
+spillet er et objekt
+
+
