@@ -13,6 +13,7 @@ function terningerStart() {
         tabledata
     })
 }
+
 // Saetter layout fra terningerne
 function unChangeableInput() {
     const alleInput = document.querySelectorAll("input#raekkeInput")
