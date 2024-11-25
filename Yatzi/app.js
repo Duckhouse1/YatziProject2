@@ -1,6 +1,10 @@
 const express = require("express")
 const session = require("express-session")
+/*
+const game = require("./YatziGame")
 
+const YatziGame = game()
+*/
 const app = express()
 
 //MIIDDLEWARE
