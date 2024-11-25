@@ -1,23 +1,16 @@
-<<<<<<< HEAD
-const express = require("express")
-const session = require("express-session")
-/*
-const game = require("./YatziGame")
 
-const YatziGame = game()
-*/
-const app = express()
-=======
 const express = require("express");
 const session = require("express-session");
 const fs = require('node:fs/promises');
 const path = require("path");
-
 const app = express();
->>>>>>> fb38c61fefb77585334612f8fe3680dfebf22030
+const { YatziGame } = require('./YatziGame');
+
+const game = new YatziGame();
 
 // MIDDLEWARE
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
 app.use(express.static('assets'));
 
 app.use(session({
@@ -29,18 +22,20 @@ app.set("view engine", "pug");
 
 const filePath = path.resolve(__dirname, 'spillere.txt');
 
-async function spillerFil(spiller) {
+async function spillerFil() {
     try {
-        let content = '';
+        let content = "Spillere: ";
+        /*
         try {
-            content = await fs.readFile(filePath, { encoding: 'utf8' });
+            const fileContent = await fs.readFile(filePath, { encoding: 'utf8' });
+            content = JSON.parse(fileContent); // Parse existing JSON data
         } catch (err) {
             console.log('No existing file or error reading it');
         }
-        
-        const updatedContent = content + '\n' + spiller;
-        
-        await fs.writeFile(filePath, updatedContent);
+            */
+         content.push("Spillere: "+game.getPlayers())
+
+         await fs.writeFile(filePath, JSON.stringify(content, 2) , { encoding: 'utf8' });
     } catch (err) {
         console.log("Error writing to file:", err);
     }
@@ -57,6 +52,8 @@ app.get("/", (req, res) => {
 app.post("/:spiller", (req, res) => {
     let spiller = req.body.spiller;
     if (spiller) {
+        game.addPlayer(spiller)
+        console.log(game.getPlayers());
         req.session.players.push(spiller);
         spillerFil(spiller);
     }
@@ -67,6 +64,8 @@ app.post("/", (req, res) => {
     let player = req.body.spiller;
     console.log("Player name:", player);
     if (player) {
+        game.addPlayer(player)
+        console.log(game.getPlayers());
         req.session.players.push(player);
         spillerFil(player);
     }
