@@ -70,3 +70,34 @@ body {
     justify-content: center;
     margin-left: 24%;
 }
+.disabled {
+    opacity: 0.5; /* Makes the dice appear faded */
+    pointer-events: none; /* Disables interaction */
+    border: 2px solid blue; /* Adds a border to visually indicate that the dice is held */
+}
+
+
+input.disabled {
+    opacity: 0.5; /* Makes the dice appear faded */
+    pointer-events: none; /* Disables interaction */
+    border: 2px solid rgb(255, 0, 0); /* Adds a border to visually indicate that the dice is held */
+}
+.currentPlayer {
+    color: blue;
+}
+
+.donePlayer {
+    color: red;
+}
+
+.winner {
+    color: gold;
+    align-items: center;
+    font-size: 130px;
+}
+
+.taber {
+    color: rgb(116, 20, 20);
+    align-items: center;
+    font-size: large;
+}

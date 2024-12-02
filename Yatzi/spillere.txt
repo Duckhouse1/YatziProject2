@@ -1,41 +1,101 @@
 YatziGame: {
   "terninger": [
     {
-      "value": 4,
-      "hold": false
-    },
-    {
-      "value": 6,
-      "hold": false
-    },
-    {
-      "value": 3,
-      "hold": false
-    },
-    {
-      "value": 6,
-      "hold": false
-    },
-    {
       "value": 2,
-      "hold": false
+      "hold": false,
+      "imgString": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Dice-1-b.svg"
+    },
+    {
+      "value": 5,
+      "hold": false,
+      "imgString": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Dice-2-b.svg"
+    },
+    {
+      "value": 1,
+      "hold": false,
+      "imgString": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Dice-3-b.svg"
+    },
+    {
+      "value": 1,
+      "hold": false,
+      "imgString": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Dice-4-b.svg/900px-Dice-4-b.svg.png?20231029222734"
+    },
+    {
+      "value": 6,
+      "hold": false,
+      "imgString": "https://upload.wikimedia.org/wikipedia/commons/0/08/Dice-5-b.svg"
     }
   ],
   "spillere": [
     {
-      "navn": "Clemen",
+      "navn": "asd",
       "score": 0,
-      "rollsLeft": 3
-    },
-    {
-      "navn": "Clemen",
-      "score": 0,
-      "rollsLeft": 3
-    },
-    {
-      "navn": "Dennis",
-      "score": 0,
-      "rollsLeft": 3
+      "rollsLeft": 3,
+      "data": {
+        "gameData": {
+          "1-s": {
+            "value": 0,
+            "disabled": false
+          },
+          "2-s": {
+            "value": 0,
+            "disabled": false
+          },
+          "3-s": {
+            "value": 0,
+            "disabled": false
+          },
+          "4-s": {
+            "value": 0,
+            "disabled": false
+          },
+          "5-s": {
+            "value": 0,
+            "disabled": false
+          },
+          "6-s": {
+            "value": 0,
+            "disabled": false
+          },
+          "One pair": {
+            "value": 0,
+            "disabled": false
+          },
+          "Two pair": {
+            "value": 0,
+            "disabled": false
+          },
+          "Three same": {
+            "value": 0,
+            "disabled": false
+          },
+          "Four same": {
+            "value": 0,
+            "disabled": false
+          },
+          "Full house": {
+            "value": 0,
+            "disabled": false
+          },
+          "Small straight": {
+            "value": 0,
+            "disabled": false
+          },
+          "Large straight": {
+            "value": 0,
+            "disabled": false
+          },
+          "Chance": {
+            "value": 0,
+            "disabled": false
+          },
+          "Yatzi": {
+            "value": 0,
+            "disabled": false
+          }
+        }
+      },
+      "done": false
     }
   ]
 }

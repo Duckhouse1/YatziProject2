@@ -5,65 +5,62 @@ html
         title Yatzi projekt
         link(rel="stylesheet" href="GuI.css") 
         script(src="LogikGuI.js" defer)
+        meta(http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate")
+        meta(http-equiv="Pragma" content="no-cache")
+        meta(http-equiv="Expires" content="0")
     body
         #Terninger-Container
             #Terninger
                 table
                     tr
-                    td#td1
-                        img(src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Dice-1-b.svg" alt="")
-                    td#td2
-                        img(src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Dice-2-b.svg" alt="")
-                    td#td3
-                        img(src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Dice-3-b.svg" alt="")
-                    td#td4
-                        img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Dice-4-b.svg/900px-Dice-4-b.svg.png?20231029222734" alt="")
-                    td#td5
-                        img(src="https://upload.wikimedia.org/wikipedia/commons/0/08/Dice-5-b.svg" alt="")
+                        each terning, index in terninger
+                            td(id="td-#{index + 1}" class=diceArray)
+                                img(
+                                    id=`dice-${index + 1}`
+                                    src=terning.imgString 
+                                    alt=`Dice ${index + 1}: ${terning.value}`
+                                )
             #rolls
-                label#TurnLabel Turn:
-                button#rollButton Roll
+                label#TurnLabel Turns:
+                span#rollsLeft= currentPlayer.rollsLeft
+                include includes/rollButton.pug
         #spiller-container
-            include includes/spiller.pug
+            include includes/spiller.pug 
+            h1 Score:
+            ul
+                each spiller in gameSpillere
+                    li(class=(spiller.done ? "donePlayer" : ""))=spiller.navn + ": " + spiller.score
+            h1 Current Player:
+            h3(class=currentPlayer ? "currentPlayer" : "") #{currentPlayer.navn}
         #Point-Container
             #PointLabel-Container
-                label 1-s
-                label 2-s
-                label 3-s
-                label 4-s
-                label 5-s
-                label 6-s
-                label One pair
-                label Two pair
-                label Three same
-                label Four same
-                label Full house
-                label Small straight
-                label Large straight
-                label Chance
-                label Yatzi
+                each value, key in gameData
+                    label= key
             #raekkeInput
-                input(type="text" name="1-s" readonly)
-                input(type="text" name="2-s" readonly)
-                input(type="text" name="3-s" readonly)
-                input(type="text" name="4-s" readonly)
-                input(type="text" name="5-s" readonly)
-                input(type="text" name="6-s" readonly)
-                input(type="text" name="One pair" readonly)
-                input(type="text" name="Two pair" readonly)
-                input(type="text" name="Three same" readonly)
-                input(type="text" name="Four same" readonly)
-                input(type="text" name="Full house" readonly)
-                input(type="text" name="Small straight" readonly)
-                input(type="text" name="Large straight" readonly)
-                input(type="text" name="Chance" readonly)
-                input(type="text" name="Yatzi" readonly)
+                each value, key in gameData
+                    input(
+                        type="text" 
+                        name=key
+                        value=value.value
+                        class=(value.disabled ? 'disabled' : '')
+                        readonly)
             #sumRaekke
                 label Sum:
-                input#Sum(type="text" name="Sum" readonly)
+                input#Sum(
+                    type="text" 
+                    name="Sum" 
+                    value= currentPlayer.score
+                    readonly)
             #bonusTotalRaekke
                 label Bonus:
-                input#Bonus(type="text" name="Bonus" disabled=true placeholder="50")
+                input#Bonus(
+                    type="text" 
+                    name="Bonus" 
+                    disabled=true 
+                    placeholder="50")
                 #Total
                     label Total:
-                    input#Total(type="text" name="Total")
+                    input#Total(
+                        type="text" 
+                        name="Total" 
+                        value= currentPlayer.score) 
