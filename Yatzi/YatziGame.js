@@ -66,6 +66,8 @@ class Spiller {
         this.rollsLeft = 3
         this.data = new gameData()
         this.done = false
+        this.sumScore = 0
+        this.bonis = false
     }
 
     getNavn(){

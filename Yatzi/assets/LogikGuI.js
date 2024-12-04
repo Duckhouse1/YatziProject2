@@ -1,5 +1,3 @@
-const bodyNode = document.body
-
 const button = document.querySelector("#rollButton")
 const terninger = document.querySelectorAll("img")
 const inputs = document.querySelectorAll(".input")
@@ -41,7 +39,6 @@ async function holdDice(index) {
         });
 
         const data = await response.json();
-
         if (data.success) {
             const diceElement = document.getElementById(`dice-${index + 1}`);
             if (data.hold) {
@@ -65,8 +62,9 @@ async function holdIndput(keyIndex) {
         });
 
         const data = await response.json();
-
-        if (data.success) {
+        if (data.redirect) {
+            window.location.href = data.url;
+        } else if (data.success) {
             let input = document.getElementById(`input${data.key}`)
 
             if (data.hold) {
@@ -78,10 +76,9 @@ async function holdIndput(keyIndex) {
 
         resetDices()
         updateScoreList(data.forrigSpiller)
-        updateSumAndTotal(data.currentPlayer, data.sumScore)
+        updateSumAndTotal(data.forrigSpiller)
         updateInputafterSelect(data.currentPlayer)
         updateCurrentPlayer(data.currentPlayer.navn)
-
     } catch {
 
     }
@@ -109,6 +106,15 @@ function updateInputafterSelect(spiller) {
 
         }
     })
+
+    let sumInput = document.getElementById("Sum")
+    sumInput.value = spiller.sumScore
+    let totalNode = document.getElementById("Totalinput")
+    totalNode.value = spiller.score
+    if (spiller.sumScore < 63) {
+        let bonusNode = document.getElementById("Bonus")
+        bonusNode.classList.add("disabled")
+    }
 }
 
 function updateInputs(spiller) {
@@ -120,23 +126,28 @@ function updateInputs(spiller) {
     })
 }
 function updateScoreList(forrigeSpiller) {
-    console.log(forrigeSpiller.navn);
 
     let scoreList = document.getElementById(`li${forrigeSpiller.navn}`)
 
-    console.log(scoreList.textContent);
     scoreList.textContent = `${forrigeSpiller.navn}: ${forrigeSpiller.score}`
-    console.log(scoreList.textContent);
 
 }
 
-function updateSumAndTotal(currentPlayer,sumScore) {
+function updateSumAndTotal(spiller) {
     let sumNode = document.getElementById("Sum")
-    let totalNode = document.getElementById("Total")
+    let totalNode = document.getElementById("Totalinput")
     let bonusNode = document.getElementById("Bonus")
-    console.log(sumScore);
-    sumNode.value = sumScore
-    console.log(sumNode.value);
+
+    sumNode.value = spiller.sumScore
+    totalNode.value = spiller.score
+
+    if (spiller.sumScore >= 63 && bonusNode.classList.contains("disabled")) {
+        bonusNode.classList.remove("disabled")
+        bonusNode.classList.remove("placeholder")
+
+    } else {
+        bonusNode.classList.add("disabled")
+    }
 
 }
 
@@ -145,24 +156,6 @@ function updateCurrentPlayer(currentplayer) {
 
     currentPlayerNode.textContent = currentplayer
 }
-
-function nulstilInputs(currentPlayer){
-    const spillerDataKeys = Object.keys(currentPlayer.data.gameData)
-
-    spillerDataKeys.forEach(key => {
-        let input = document.getElementById(`input${key}`)
-        console.log(`Resetting input${key}:`, input); // Debugging
-        if (!input.classList.contains("disabled")){
-            input.value = 0
-        } 
-    })
-
-}
-
-
-
-
-
 
 
 

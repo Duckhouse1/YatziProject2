@@ -32,7 +32,6 @@ app.get("/", (req, res) => {
 });
 app.post("/", (req, res) => {
     let player = req.body.spiller;
-    console.log("Player name:", player);
     if (player) {
         game.addPlayer(player);
         req.session.players.push(player);
@@ -75,7 +74,7 @@ app.post("/rollDice", async (req, res) => {
                     dice.imgString = diceImages[dice.value - 1];
                 }
             });
-
+            
             currentPlayer.rollsLeft -= 1;
         }
 
@@ -122,17 +121,15 @@ app.get("/toggleDisabledInput/:key", (req, res) => {
     spiller.score += spiller.data.gameData[key].value
     spiller.data.gameData[key].disabled = true
 
-    let sumScore = 0
-
-    Object.keys(spiller.data.gameData).forEach((key, index) => {
-        if (index >= 0 && index <= 5) {
-            if (spiller.data.gameData[`${index + 1}-s`].disabled === true) {
-                sumScore += spiller.data.gameData[key].value
-            }
+    
+    if (key.endsWith("s")) {
+        spiller.sumScore += Number(spiller.data.gameData[key].value)
+        if (spiller.sumScore >= 63 && !spiller.bonus){
+            spiller.score += 50
+            spiller.bonus = true
         }
-    })
-    console.log(sumScore);
-    nulStilInputs("sum" + spiller)
+    }
+    nulStilInputs()
 
     spiller.rollsLeft = 3
     game.nextPlayer();
@@ -149,16 +146,19 @@ app.get("/toggleDisabledInput/:key", (req, res) => {
         spiller.done = true;
     }
     if (game.spillere.every(spiller => spiller.done === true)) {
-        res.redirect("/results")
+
+        return res.json({
+            redirect: true,
+            url: "/results"
+        })
+
     } else {
         res.json({
             forrigSpiller: spiller,
             success: true,
-            data: game.currentPlayer.data.gameData,
             currentPlayer: game.currentPlayer,
             key: key,
-            hold: spiller.data.gameData[key].disabled,
-            sumScore: sumScore
+            hold: spiller.data.gameData[key].disabled
         });
     }
 
@@ -167,7 +167,6 @@ app.get("/toggleDisabledInput/:key", (req, res) => {
 app.get("/results", (req, res) => {
     let vinder = game.spillere.find((s1, s2) => s1.score > s2)
     let tabere = game.spillere.filter(spiller => spiller.score < vinder.score)
-    console.log(vinder);
 
     res.render("results", { vinder: vinder, tabere: tabere })
 })
@@ -192,7 +191,6 @@ function udregnData(array, spiller) {
     nulStilInputs()
     const dices = array;
     const antal = [0, 0, 0, 0, 0, 0];
-    console.log(antal);
     // -s
     dices.forEach((dice, index) => {
         if (dice.value >= 1 && dice.value <= 6) {
@@ -226,7 +224,6 @@ function udregnData(array, spiller) {
         }
     }
     );
-    console.log(antal);
     //Small straight
     if ([1, 1, 1, 1, 1, 0].every((value, index) => value === antal[index])) {
         spiller.data.gameData["Small straight"].value = 15;
@@ -237,7 +234,6 @@ function udregnData(array, spiller) {
     }
     //To par
     let flerePar = antal.filter(value => value >= 2).length >= 2;
-    console.log("Flere par" + flerePar);
     if (flerePar && spiller.data.gameData["Two pair"].disabled === false) {
         let indexForPar = antal.reduce((indexes, value, index) => {
             if (value >= 2) {
@@ -250,7 +246,6 @@ function udregnData(array, spiller) {
         let Indexpar2 = indexForPar[1]
 
         let valueToReturn = (Indexpar1 + Indexpar2) * 2
-        console.log(valueToReturn);
         spiller.data.gameData["Two pair"].value = valueToReturn;
     }
 
