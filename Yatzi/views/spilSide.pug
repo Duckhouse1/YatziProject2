@@ -29,9 +29,9 @@ html
             h1 Score:
             ul
                 each spiller in gameSpillere
-                    li(class=(spiller.done ? "donePlayer" : ""))=spiller.navn + ": " + spiller.score
+                    li(id=`li${spiller.navn}` class=(spiller.done ? "donePlayer" : ""))=spiller.navn + ": " + spiller.score
             h1 Current Player:
-            h3(class=currentPlayer ? "currentPlayer" : "") #{currentPlayer.navn}
+            h3(id="currentPlayerh3" class=currentPlayer ? "currentPlayer" : "") #{currentPlayer.navn}
         #Point-Container
             #PointLabel-Container
                 each value, key in gameData
@@ -39,10 +39,11 @@ html
             #raekkeInput
                 each value, key in gameData
                     input(
+                        id = `input${key}`
                         type="text" 
                         name=key
                         value=value.value
-                        class=(value.disabled ? 'disabled' : '')
+                        class="input"
                         readonly)
             #sumRaekke
                 label Sum:

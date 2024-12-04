@@ -2,39 +2,29 @@ const bodyNode = document.body
 
 const button = document.querySelector("#rollButton")
 const terninger = document.querySelectorAll("img")
-const alleInput = document.
+const inputs = document.querySelectorAll(".input")
+
 async function rollDice() {
     try {
-        const response = await fetch("/rollDice", {
-            method: "POST",
-        });
-
+        const response = await fetch("/rollDice", { method: "POST" });
         const data = await response.json();
 
-        console.log("Dette er data" + data);
         if (data.success) {
             const diceArray = data.terninger;
-            console.log("Dette er dicearray" + diceArray);
             diceArray.forEach((dice, index) => {
                 const diceElement = document.getElementById(`dice-${index + 1}`);
                 diceElement.src = dice.imgString;
-                diceElement.dataset.value = dice.value;
-                console.log(`Dice ${index + 1}: Value = ${dice.value}, Held = ${dice.held}`);
             });
 
-            const rollsLeftElement = document.querySelector("#rollsLeft");
-            rollsLeftElement.textContent = data.currentPlayer.rollsLeft;
+            document.querySelector("#rollsLeft").textContent = data.currentPlayer.rollsLeft;
 
-            let currentPlayer = data.currentPlayer;
-            let currentPlayerData = currentPlayer.data.gameData
+            // Opdater inputfelterne
+            const currentPlayerData = data.CurrentPlayerData;
+            Object.keys(currentPlayerData).forEach((key) => {
+                const inputElement = document.getElementById(`input${key}`);
+                inputElement.value = currentPlayerData[key].value;
 
-            Object.keys(currentPlayerData).forEach(key => {
-                let nøgle = document.getElementsByName(key)
-                if (nøgle === false) {
-                    nøgle.textContent = key.value
-                }
-            })
-            console.log("Updated dice and player state successfully!");
+            });
         } else {
             console.error("Failed to roll dice:", data.message);
         }
@@ -42,7 +32,6 @@ async function rollDice() {
         console.error("Error during dice roll:", error);
     }
 }
-
 button.addEventListener("click", rollDice)
 
 async function holdDice(index) {
@@ -56,9 +45,9 @@ async function holdDice(index) {
         if (data.success) {
             const diceElement = document.getElementById(`dice-${index + 1}`);
             if (data.hold) {
-                diceElement.classList.add("disabled"); 
+                diceElement.classList.add("disabled");
             } else {
-                diceElement.classList.remove("disabled"); 
+                diceElement.classList.remove("disabled");
             }
         }
     } catch {
@@ -69,11 +58,113 @@ terninger.forEach((terning, index) => {
     terning.addEventListener("click", () => holdDice(index))
 })
 
+async function holdIndput(keyIndex) {
+    try {
+        const response = await fetch(`/toggleDisabledInput/${keyIndex}`, {
+            method: "GET",
+        });
 
+        const data = await response.json();
 
-async function holdIndput() {
-    
+        if (data.success) {
+            let input = document.getElementById(`input${data.key}`)
+
+            if (data.hold) {
+                input.classList.add("disabled");
+            } else {
+                input.classList.remove("disabled");
+            }
+        }
+
+        resetDices()
+        updateScoreList(data.forrigSpiller)
+        updateSumAndTotal(data.currentPlayer, data.sumScore)
+        updateInputafterSelect(data.currentPlayer)
+        updateCurrentPlayer(data.currentPlayer.navn)
+
+    } catch {
+
+    }
 }
+inputs.forEach((input, index) => {
+    input.addEventListener("click", () => holdIndput(index))
+})
+
+function resetDices() {
+    terninger.forEach(terning => {
+        terning.src = "https://upload.wikimedia.org/wikipedia/commons/1/1b/Dice-1-b.svg"
+        terning.classList.remove("disabled");
+    })
+}
+
+function updateInputafterSelect(spiller) {
+    const spillerDataKeys = Object.keys(spiller.data.gameData)
+    spillerDataKeys.forEach((key, index) => {
+        let input = document.getElementById(`input${key}`)
+        input.value = spiller.data.gameData[key].value
+        if (spiller.data.gameData[key].disabled === false) {
+            input.classList.remove("disabled");
+        } else {
+            input.classList.add("disabled");
+
+        }
+    })
+}
+
+function updateInputs(spiller) {
+    const spillerDataKeys = Object.keys(spiller.data.gameData)
+
+    spillerDataKeys.forEach((key, index) => {
+        let input = document.getElementById(`input${key}`)
+        input.value = spiller.data.gameData[key].value
+    })
+}
+function updateScoreList(forrigeSpiller) {
+    console.log(forrigeSpiller.navn);
+
+    let scoreList = document.getElementById(`li${forrigeSpiller.navn}`)
+
+    console.log(scoreList.textContent);
+    scoreList.textContent = `${forrigeSpiller.navn}: ${forrigeSpiller.score}`
+    console.log(scoreList.textContent);
+
+}
+
+function updateSumAndTotal(currentPlayer,sumScore) {
+    let sumNode = document.getElementById("Sum")
+    let totalNode = document.getElementById("Total")
+    let bonusNode = document.getElementById("Bonus")
+    console.log(sumScore);
+    sumNode.value = sumScore
+    console.log(sumNode.value);
+
+}
+
+function updateCurrentPlayer(currentplayer) {
+    let currentPlayerNode = document.getElementById("currentPlayerh3")
+
+    currentPlayerNode.textContent = currentplayer
+}
+
+function nulstilInputs(currentPlayer){
+    const spillerDataKeys = Object.keys(currentPlayer.data.gameData)
+
+    spillerDataKeys.forEach(key => {
+        let input = document.getElementById(`input${key}`)
+        console.log(`Resetting input${key}:`, input); // Debugging
+        if (!input.classList.contains("disabled")){
+            input.value = 0
+        } 
+    })
+
+}
+
+
+
+
+
+
+
 
 // Saetter layout fra terningerne
 function unChangeableInput() {

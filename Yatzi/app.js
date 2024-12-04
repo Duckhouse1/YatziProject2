@@ -80,19 +80,14 @@ app.post("/rollDice", async (req, res) => {
         }
 
         udregnData(game.terninger, currentPlayer);
-        console.log(game.terninger);
         res.json({
             success: true,
-            terninger: game.terninger, 
+            terninger: game.terninger,
             currentPlayer: currentPlayer,
+            CurrentPlayerData: currentPlayer.data.gameData
         });
     } catch (error) {
-        console.error("Error rolling dice:", error);
-        res.status(500).json({
-            success: false,
-            message: "An error occurred while rolling dice",
-            error: error.message,
-        });
+
     }
 });
 
@@ -119,13 +114,25 @@ app.get("/toggleHold/:index", (req, res) => {
 });
 
 app.get("/toggleDisabledInput/:key", (req, res) => {
-    const key = req.params.key;
     const spiller = game.currentPlayer;
+    const keyIndex = parseInt(req.params.key);
+
+    let key = Object.keys(spiller.data.gameData).find((key, index) => index === keyIndex)
 
     spiller.score += spiller.data.gameData[key].value
     spiller.data.gameData[key].disabled = true
 
-    nulStilInputs()
+    let sumScore = 0
+
+    Object.keys(spiller.data.gameData).forEach((key, index) => {
+        if (index >= 0 && index <= 5) {
+            if (spiller.data.gameData[`${index + 1}-s`].disabled === true) {
+                sumScore += spiller.data.gameData[key].value
+            }
+        }
+    })
+    console.log(sumScore);
+    nulStilInputs("sum" + spiller)
 
     spiller.rollsLeft = 3
     game.nextPlayer();
@@ -144,11 +151,19 @@ app.get("/toggleDisabledInput/:key", (req, res) => {
     if (game.spillere.every(spiller => spiller.done === true)) {
         res.redirect("/results")
     } else {
-        res.redirect("/spilSide");
+        res.json({
+            forrigSpiller: spiller,
+            success: true,
+            data: game.currentPlayer.data.gameData,
+            currentPlayer: game.currentPlayer,
+            key: key,
+            hold: spiller.data.gameData[key].disabled,
+            sumScore: sumScore
+        });
     }
 
 });
-/*
+
 app.get("/results", (req, res) => {
     let vinder = game.spillere.find((s1, s2) => s1.score > s2)
     let tabere = game.spillere.filter(spiller => spiller.score < vinder.score)
@@ -164,13 +179,6 @@ app.get("/rematch", (req, res) => {
     res.redirect("/")
 })
 
-app.get("/bonusHandler", (req, res) => {
-    res.json({ game })
-})
-
-
-
-*/
 async function gemSpil() {
     let content = "YatziGame: ";
 
@@ -181,9 +189,10 @@ async function gemSpil() {
 
 
 function udregnData(array, spiller) {
+    nulStilInputs()
     const dices = array;
     const antal = [0, 0, 0, 0, 0, 0];
-
+    console.log(antal);
     // -s
     dices.forEach((dice, index) => {
         if (dice.value >= 1 && dice.value <= 6) {
@@ -212,7 +221,7 @@ function udregnData(array, spiller) {
         if (count >= 4 && spiller.data.gameData["Four same"].disabled === false) {
             spiller.data.gameData["Four same"].value = value * 4;
         }
-        if (count >= 5 && spiller.data.gameData["Yatzi"].value === false) {
+        if (count >= 5 && spiller.data.gameData["Yatzi"].disabled === false) {
             spiller.data.gameData["Yatzi"].value = value * 5;
         }
     }
@@ -228,6 +237,7 @@ function udregnData(array, spiller) {
     }
     //To par
     let flerePar = antal.filter(value => value >= 2).length >= 2;
+    console.log("Flere par" + flerePar);
     if (flerePar && spiller.data.gameData["Two pair"].disabled === false) {
         let indexForPar = antal.reduce((indexes, value, index) => {
             if (value >= 2) {
@@ -240,6 +250,7 @@ function udregnData(array, spiller) {
         let Indexpar2 = indexForPar[1]
 
         let valueToReturn = (Indexpar1 + Indexpar2) * 2
+        console.log(valueToReturn);
         spiller.data.gameData["Two pair"].value = valueToReturn;
     }
 
@@ -257,6 +268,7 @@ function udregnData(array, spiller) {
         }
     })
     if (par > 0 && treEns > 0) {
+        console.log(spiller.data.gameData["Full house"].value);
         spiller.data.gameData["Full house"].value = par + treEns;
     }
 }
