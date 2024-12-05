@@ -1,21 +1,21 @@
 YatziGame: {
   "terninger": [
     {
-      "value": 5,
-      "hold": false,
-      "imgString": "https://upload.wikimedia.org/wikipedia/commons/0/08/Dice-5-b.svg",
-      "class": "disabled"
-    },
-    {
       "value": 6,
       "hold": false,
       "imgString": "https://upload.wikimedia.org/wikipedia/commons/2/26/Dice-6-b.svg",
       "class": "disabled"
     },
     {
-      "value": 4,
+      "value": 1,
       "hold": false,
-      "imgString": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Dice-4-b.svg/900px-Dice-4-b.svg.png?20231029222734",
+      "imgString": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Dice-1-b.svg",
+      "class": "disabled"
+    },
+    {
+      "value": 6,
+      "hold": false,
+      "imgString": "https://upload.wikimedia.org/wikipedia/commons/2/26/Dice-6-b.svg",
       "class": "disabled"
     },
     {
@@ -34,222 +34,219 @@ YatziGame: {
   "spillere": [
     {
       "navn": "Dennis",
-      "score": 237,
+      "score": 26,
       "rollsLeft": 3,
       "data": {
         "gameData": {
           "1-s": {
-            "value": 3,
+            "value": 2,
             "disabled": true
           },
           "2-s": {
-            "value": 8,
-            "disabled": true
+            "value": 0,
+            "disabled": false
           },
           "3-s": {
-            "value": 9,
-            "disabled": true
+            "value": 0,
+            "disabled": false
           },
           "4-s": {
             "value": 12,
             "disabled": true
           },
           "5-s": {
-            "value": 15,
-            "disabled": true
+            "value": 0,
+            "disabled": false
           },
           "6-s": {
-            "value": 30,
-            "disabled": true
-          },
-          "One pair": {
-            "value": 6,
-            "disabled": true
-          },
-          "Two pair": {
-            "value": 12,
-            "disabled": true
-          },
-          "Three same": {
-            "value": 15,
-            "disabled": true
-          },
-          "Four same": {
-            "value": 24,
-            "disabled": true
-          },
-          "Full house": {
-            "value": 28,
-            "disabled": true
-          },
-          "Small straight": {
             "value": 0,
-            "disabled": true
-          },
-          "Large straight": {
-            "value": 0,
-            "disabled": true
-          },
-          "Chance": {
-            "value": 25,
-            "disabled": true
-          },
-          "Yatzi": {
-            "value": 0,
-            "disabled": true
-          }
-        }
-      },
-      "done": true,
-      "sumScore": 77,
-      "bonis": false,
-      "bonus": true
-    },
-    {
-      "navn": "Clemen",
-      "score": 208,
-      "rollsLeft": 3,
-      "data": {
-        "gameData": {
-          "1-s": {
-            "value": 3,
-            "disabled": true
-          },
-          "2-s": {
-            "value": 10,
-            "disabled": true
-          },
-          "3-s": {
-            "value": 6,
-            "disabled": true
-          },
-          "4-s": {
-            "value": 12,
-            "disabled": true
-          },
-          "5-s": {
-            "value": 25,
-            "disabled": true
-          },
-          "6-s": {
-            "value": 18,
-            "disabled": true
+            "disabled": false
           },
           "One pair": {
             "value": 12,
             "disabled": true
           },
           "Two pair": {
-            "value": 16,
-            "disabled": true
+            "value": 0,
+            "disabled": false
           },
           "Three same": {
-            "value": 18,
-            "disabled": true
+            "value": 0,
+            "disabled": false
           },
           "Four same": {
             "value": 0,
-            "disabled": true
+            "disabled": false
           },
           "Full house": {
             "value": 0,
-            "disabled": true
+            "disabled": false
           },
           "Small straight": {
             "value": 0,
-            "disabled": true
+            "disabled": false
           },
           "Large straight": {
-            "value": 20,
-            "disabled": true
+            "value": 0,
+            "disabled": false
           },
           "Chance": {
-            "value": 18,
-            "disabled": true
+            "value": 0,
+            "disabled": false
           },
           "Yatzi": {
             "value": 0,
-            "disabled": true
+            "disabled": false
           }
         }
       },
       "done": false,
-      "sumScore": 74,
-      "bonis": false,
-      "bonus": true
+      "sumScore": 14,
+      "bonis": false
+    },
+    {
+      "navn": "Clemen",
+      "score": 38,
+      "rollsLeft": 3,
+      "data": {
+        "gameData": {
+          "1-s": {
+            "value": 0,
+            "disabled": false
+          },
+          "2-s": {
+            "value": 0,
+            "disabled": false
+          },
+          "3-s": {
+            "value": 0,
+            "disabled": false
+          },
+          "4-s": {
+            "value": 0,
+            "disabled": false
+          },
+          "5-s": {
+            "value": 20,
+            "disabled": true
+          },
+          "6-s": {
+            "value": 0,
+            "disabled": false
+          },
+          "One pair": {
+            "value": 0,
+            "disabled": false
+          },
+          "Two pair": {
+            "value": 18,
+            "disabled": true
+          },
+          "Three same": {
+            "value": 0,
+            "disabled": false
+          },
+          "Four same": {
+            "value": 0,
+            "disabled": false
+          },
+          "Full house": {
+            "value": 0,
+            "disabled": false
+          },
+          "Small straight": {
+            "value": 0,
+            "disabled": false
+          },
+          "Large straight": {
+            "value": 0,
+            "disabled": false
+          },
+          "Chance": {
+            "value": 0,
+            "disabled": false
+          },
+          "Yatzi": {
+            "value": 0,
+            "disabled": false
+          }
+        }
+      },
+      "done": false,
+      "sumScore": 20,
+      "bonis": false
     }
   ],
   "currentPlayer": {
-    "navn": "Dennis",
-    "score": 237,
+    "navn": "Clemen",
+    "score": 38,
     "rollsLeft": 3,
     "data": {
       "gameData": {
         "1-s": {
-          "value": 3,
-          "disabled": true
+          "value": 0,
+          "disabled": false
         },
         "2-s": {
-          "value": 8,
-          "disabled": true
+          "value": 0,
+          "disabled": false
         },
         "3-s": {
-          "value": 9,
-          "disabled": true
+          "value": 0,
+          "disabled": false
         },
         "4-s": {
-          "value": 12,
-          "disabled": true
+          "value": 0,
+          "disabled": false
         },
         "5-s": {
-          "value": 15,
+          "value": 20,
           "disabled": true
         },
         "6-s": {
-          "value": 30,
-          "disabled": true
+          "value": 0,
+          "disabled": false
         },
         "One pair": {
-          "value": 6,
-          "disabled": true
+          "value": 0,
+          "disabled": false
         },
         "Two pair": {
-          "value": 12,
+          "value": 18,
           "disabled": true
         },
         "Three same": {
-          "value": 15,
-          "disabled": true
+          "value": 0,
+          "disabled": false
         },
         "Four same": {
-          "value": 24,
-          "disabled": true
+          "value": 0,
+          "disabled": false
         },
         "Full house": {
-          "value": 28,
-          "disabled": true
+          "value": 0,
+          "disabled": false
         },
         "Small straight": {
           "value": 0,
-          "disabled": true
+          "disabled": false
         },
         "Large straight": {
           "value": 0,
-          "disabled": true
+          "disabled": false
         },
         "Chance": {
-          "value": 25,
-          "disabled": true
+          "value": 0,
+          "disabled": false
         },
         "Yatzi": {
           "value": 0,
-          "disabled": true
+          "disabled": false
         }
       }
     },
-    "done": true,
-    "sumScore": 77,
-    "bonis": false,
-    "bonus": true
+    "done": false,
+    "sumScore": 20,
+    "bonis": false
   }
 }

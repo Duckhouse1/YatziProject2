@@ -23,6 +23,7 @@ app.set("view engine", "pug");
 const filePath = path.resolve(__dirname, 'spillere.txt');
 
 // ROUTES
+//Forside
 app.get("/", (req, res) => {
     if (!req.session.players) {
         req.session.players = [];
@@ -41,7 +42,7 @@ app.post("/", (req, res) => {
     game.currentPlayer = game.spillere[0]
     res.redirect(302, "/");
 });
-
+//YatziForside
 app.get("/spilSide", (req, res) => {
     let terninger = game.terninger
     let spiller = game.currentPlayer
@@ -54,7 +55,7 @@ app.listen(8000, () => {
     console.log("Serveren lytter på port 8000");
 });
 
-
+//Når man trykker på roll knappen
 app.post("/rollDice", async (req, res) => {
     const diceImages = [
         "https://upload.wikimedia.org/wikipedia/commons/1/1b/Dice-1-b.svg",
@@ -91,7 +92,7 @@ app.post("/rollDice", async (req, res) => {
     }
 });
 
-
+//Hold på den enkelte terning
 app.get("/toggleHold/:index", (req, res) => {
     const index = parseInt(req.params.index);
 
@@ -112,7 +113,7 @@ app.get("/toggleHold/:index", (req, res) => {
         res.status(400).send("Invalid dice index.");
     }
 });
-
+//Hold/disable det specifikke input 
 app.get("/toggleDisabledInput/:key", (req, res) => {
     const spiller = game.currentPlayer;
     const keyIndex = parseInt(req.params.key);
@@ -164,14 +165,14 @@ app.get("/toggleDisabledInput/:key", (req, res) => {
     }
 
 });
-
+//Render slutsiden når alle spillere er done
 app.get("/results", (req, res) => {
     let vinder = game.spillere.find((s1, s2) => s1.score > s2)
     let tabere = game.spillere.filter(spiller => spiller.score < vinder.score)
 
     res.render("results", { vinder: vinder, tabere: tabere })
 })
-
+//Når man trykker på rematch knappen
 app.get("/rematch", (req, res) => {
     game = new YatziGame()
     req.session.players = [];
