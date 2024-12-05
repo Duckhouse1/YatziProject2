@@ -27,9 +27,10 @@ app.get("/", (req, res) => {
     if (!req.session.players) {
         req.session.players = [];
         req.session.dices = []
-    }
+    } 
     res.render("forside", { spillere: req.session.players })
 });
+//Sørger for når du trykker opret ved "login"
 app.post("/", (req, res) => {
     let player = req.body.spiller;
     if (player) {
